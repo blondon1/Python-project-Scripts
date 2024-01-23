@@ -1,18 +1,16 @@
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-
-# pip install watchdog /or/ poetry add watchdog    (required)
-
 import time
 import os
 import json
+# pip install watchdog /or/ poetry add watchdog    (required)
+# Setup basic logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 class Handler(FileSystemEventHandler):
-    def on_modified(self, event):
-        for file in os.listdir(watched_folder):
-            src = f"{watched_folder}/{file}"
-            dst = f"{destination_folder}/{file}"
-            os.rename(src=src, dst=dst)
+    def __init__(self, watched_folder, destination_folder):
+        self.watched_folder = watched_folder
+        self.destination_folder = destination_folder
 
 if __name__=="__main__":
     watched_folder = input("Paste the path to the folder to be tracked: ")
