@@ -17,6 +17,9 @@ class Handler(FileSystemEventHandler):
 if __name__=="__main__":
     watched_folder = input("Paste the path to the folder to be tracked: ")
     destination_folder = input("Paste the path to the destination folder: ")
+    if not os.path.isdir(watched_folder) or not os.path.isdir(destination_folder):
+        logging.error("One or both of the specified paths are not valid directories.")
+    else:
     handler = Handler()
     observer = Observer()
     observer.schedule(event_handler=handler, path=watched_folder, recursive=True)
